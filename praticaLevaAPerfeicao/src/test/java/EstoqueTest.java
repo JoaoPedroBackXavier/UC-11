@@ -24,15 +24,23 @@ public class EstoqueTest {
     @Test
     public void testeProdutoMaisEstocadoComEstoqueVazio(){
         Exception exception = assertThrows(IllegalArgumentException.class,() -> {
-            estoquef.produtoMaisEstocado(estoque); 
+            estoquef.produtoMaisEstocado(new ArrayList<>()); 
         });
         assertEquals("Estoque vazio", exception.getMessage());
     }    
+   
+
     
     @BeforeEach
-    public void testeAdicionarNovoProduto(){
+    public void setupEstoque(){
         estoquef.adicionarProduto(estoque, "ak-47", 100);
-        assertEquals("ak-47 100",estoque.get(0).getNome() +" "+ estoque.get(0).getQuantidade());
+
+    }
+    
+    @Test
+    public void testeAdicaoNovoPeoduto(){
+        Produto produto = estoque.get(0);
+        assertEquals("ak-47 100",produto.getNome() +" "+ produto.getQuantidade());
     }
     
     @Test
@@ -49,6 +57,11 @@ public class EstoqueTest {
             estoquef.consultarQuantidade(estoque, "produto fantasma");
         });
         assertEquals("Produto 'produto fantasma' nao existe", exception.getMessage());
+    }
+    
+    @Test
+    public void testLimparEstoque(){
+        assertEquals(new ArrayList<>(),estoquef.limparEstoque(estoque));
     }
     
     

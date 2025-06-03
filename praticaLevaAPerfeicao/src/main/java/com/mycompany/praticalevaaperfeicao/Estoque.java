@@ -62,8 +62,9 @@ public class Estoque {
         return produtoMaisEstocado.getNome();
     }
     
-    public void limparEstoque(ArrayList<Produto> estoque){
+    public ArrayList<Produto> limparEstoque(ArrayList<Produto> estoque){
         estoque.clear();
+        return estoque;
     }
     
 }
